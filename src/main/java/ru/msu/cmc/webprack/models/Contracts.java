@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-
 @Entity
 @Table(name = "Contracts")
 @Getter
@@ -16,9 +15,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Contracts implements CommonEntity<Long>{
-    public enum ContractStatus {
-        NEW, IN_PROGRESS, COMPLETED
-    }
+
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     Clients client;
@@ -28,38 +25,19 @@ public class Contracts implements CommonEntity<Long>{
     Services  service;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = true, name = "contract_id")
     private Long contract_id;
 
     @Column(nullable = true, name = "start_date")
-    @Temporal(TemporalType.DATE)
     private Date start_date;
 
     @Column(nullable = true, name = "end_date")
-    @Temporal(TemporalType.DATE)
     private Date end_date;
-
-    @Enumerated(EnumType.STRING)
-    private ContractStatus contractStatus = ContractStatus.NEW;
 
     @Column(nullable = true, name = "terms")
     private String term;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employees assignedEmployee;
-
-    public ContractStatus getStatus() {
-        return this.contractStatus;
-    }
-
-    // Правильный setter для статуса
-    public void setStatus(ContractStatus status) {
-        this.contractStatus = status;
-    }
-
-    /*@Override
+    @Override
     public Long getId() {
         return client != null ? client.getId() : null;
     }
@@ -70,16 +48,6 @@ public class Contracts implements CommonEntity<Long>{
             client = new Clients();
         }
         client.setId(ID);
-    }*/
-
-    @Override
-    public Long getId() {
-        return contract_id;
-    }
-
-    @Override
-    public void setId(Long ID) {
-        this.contract_id = ID;
     }
 
     @Override

@@ -14,7 +14,7 @@ public class ServicesDAOImpl extends CommonDAOImpl<Services, Long> implements Se
         super(Services.class);
     }
 
-    /*@Override
+    @Override
     public List<Services> getServicesByName(String name) {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
@@ -42,13 +42,6 @@ public class ServicesDAOImpl extends CommonDAOImpl<Services, Long> implements Se
                             "FROM Services s WHERE lower(s.description) LIKE lower(:keyword)", Services.class)
                     .setParameter("keyword", "%" + keyword + "%")
                     .list();
-        }
-    }*/
-
-    @Override
-    public List<Services> getAllServices() {
-        try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("FROM Services s", Services.class).list();
         }
     }
 }

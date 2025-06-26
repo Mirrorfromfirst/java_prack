@@ -7,33 +7,19 @@ import lombok.*;
 
 @Entity
 @Table(name = "Clients")
-@Inheritance(strategy = InheritanceType.JOINED)  // <-- вероятно по умолчанию
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Clients implements CommonEntity<Long> {
-    /*@Id
+    @Id
     private Long id;
 
     @MapsId
     @OneToOne(optional = true)
     @JoinColumn(name = "client_id", referencedColumnName = "user_id", nullable = true)
-    private Users user;*/
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id")
-    private Long id;
-
-    //@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JoinColumn(name = "user_id", unique = true)
-    //private Users user;
-
-    //@OneToOne
-    //@JoinColumn(name = "user_id", nullable = true, unique = true)  // Необязательная связь
-    //private Users user;
+    private Users user;
 
     @Column(nullable = true, name = "username")
     private String name;
@@ -47,14 +33,17 @@ public class Clients implements CommonEntity<Long> {
     @Column(nullable = true, name = "address")
     private String address;
 
-    //@Override
-    //public Long getId() {
-      //  return user != null ? user.getId() : null;
-   //}
+    @Override
+    public Long getId() {
+        return user != null ? user.getId() : null;
+    }
 
     @Override
     public void setId(Long id) {
-        this.id = id; // Устанавливайте ID самой сущности Clients, а не связанного User
+        if (user == null) {
+            user = new Users();
+        }
+        user.setId(id);
     }
 
     @Override
@@ -63,7 +52,7 @@ public class Clients implements CommonEntity<Long> {
         if (o == null || getClass() != o.getClass()) return false; //aka links are not the same
 
         Clients other = (Clients) o;
-        return Objects.equals(id, other.id)
+        return Objects.equals(user, other.user)
                 && name.equals(other.name)
                 && phone.equals(other.phone)
                 && Objects.equals(email, other.email)

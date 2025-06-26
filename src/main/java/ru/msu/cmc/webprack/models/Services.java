@@ -15,7 +15,6 @@ import lombok.*;
 public class Services implements CommonEntity<Long>{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = true, name = "service_id")
     private Long id;
 

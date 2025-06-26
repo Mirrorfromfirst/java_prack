@@ -46,13 +46,12 @@ public abstract class CommonDAOImpl <T extends CommonEntity<ID>, ID extends Seri
                 entity.setId(null);
             }
             session.beginTransaction();
-            session.persist(entity);
-            //session.saveOrUpdate(entity);
+            session.merge(entity);
             session.getTransaction().commit();
         }
     }
 
-    /*@Override
+    @Override
     public void saveCollection(Collection<T> entities) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -61,13 +60,13 @@ public abstract class CommonDAOImpl <T extends CommonEntity<ID>, ID extends Seri
             }
             session.getTransaction().commit();
         }
-    }*/
+    }
 
     @Override
     public void update (T entity) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.update(entity);
+            session.merge(entity);
             session.getTransaction().commit();
         }
     }
@@ -76,18 +75,18 @@ public abstract class CommonDAOImpl <T extends CommonEntity<ID>, ID extends Seri
     public void delete(T entity) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.delete(entity);
+            session.remove(entity);
             session.getTransaction().commit();
         }
     }
 
-    /*@Override
+    @Override
     public void deleteById(ID id) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             T entity = getById(id);
-            session.delete(entity);
+            session.merge(entity);
             session.getTransaction().commit();
         }
-    }*/
+    }
 }

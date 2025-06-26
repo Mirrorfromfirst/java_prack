@@ -6,28 +6,19 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "Employees")
+@Table(name = "Users")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employees implements CommonEntity<Long>{
-    /*@Id
+    @Id
     private Long id;
 
     @MapsId
     @OneToOne(optional = true)
     @JoinColumn(name = "employee_id", referencedColumnName = "user_id", nullable = false)
-    private Users user;*/
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
-    private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = true)
     private Users user;
 
     @Column(nullable = true, name = "name")
@@ -45,7 +36,7 @@ public class Employees implements CommonEntity<Long>{
     @Column(nullable = true, name = "address")
     private String address;
 
-    /*@Override
+    @Override
     public Long getId() {
         return user != null ? user.getId() : null;
     }
@@ -56,7 +47,7 @@ public class Employees implements CommonEntity<Long>{
             user = new Users();
         }
         user.setId(id);
-    }*/
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -64,7 +55,7 @@ public class Employees implements CommonEntity<Long>{
         if (o == null || getClass() != o.getClass()) return false; //aka links are not the same
 
         Employees other = (Employees) o;
-        return Objects.equals(id, other.id)
+        return Objects.equals(user, other.user)
                 && name.equals(other.name)
                 && position.equals(other.position)
                 && Objects.equals(email, other.email)

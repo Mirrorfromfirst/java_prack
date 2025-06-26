@@ -10,7 +10,6 @@ import lombok.*;
 @Setter
 @ToString
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)  // <-- вероятно по умолчанию
 @AllArgsConstructor
 @Table(name = "Users")
 public class Users implements CommonEntity<Long>{
@@ -27,12 +26,6 @@ public class Users implements CommonEntity<Long>{
 
     @Column(nullable = true, name = "role")
     private String role;
-
-    /*@OneToOne(mappedBy = "user")
-    private Employees employee;
-
-    @OneToOne(mappedBy = "user")
-    private Clients client;*/
 
     @Override
     public boolean equals(Object o) {
