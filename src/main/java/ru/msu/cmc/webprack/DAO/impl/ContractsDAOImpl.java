@@ -14,7 +14,7 @@ public class ContractsDAOImpl extends CommonDAOImpl<Contracts, Long> implements 
         super(Contracts.class);
     }
 
-    @Override
+    /*@Override
     public List<Contracts> getConractsByClient(Long clientId) {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
@@ -32,5 +32,5 @@ public class ContractsDAOImpl extends CommonDAOImpl<Contracts, Long> implements 
                     .setParameter("serviceId", serviceId)
                     .list();
         }
-    }
+    }*/
 }

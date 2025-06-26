@@ -1,13 +1,13 @@
-package ru.msu.cmc.webprack;
+package ru.webprack;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WebprackApplicationTests {
+class WebpracApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }

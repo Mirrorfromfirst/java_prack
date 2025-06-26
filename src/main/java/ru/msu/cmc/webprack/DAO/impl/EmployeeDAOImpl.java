@@ -15,7 +15,7 @@ public class EmployeeDAOImpl extends CommonDAOImpl<Employees, Long> implements E
         super(Employees.class);
     }
 
-    @Override
+    /*@Override
     public List<Employees> getEmployeesByPosition(String position) {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
@@ -34,5 +34,12 @@ public class EmployeeDAOImpl extends CommonDAOImpl<Employees, Long> implements E
               //      .setParameter("education", "%" + education + "%")
                 //    .list();
        // }
+    }*/
+
+    @Override
+    public List<Employees> getAllEmployees() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("FROM Employees", Employees.class).list();
+        }
     }
 }

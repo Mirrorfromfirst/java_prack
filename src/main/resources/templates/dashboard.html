@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная - Юридическая фирма</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s;
+        }
+        .welcome-card {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<header th:fragment="main-header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">
+                <i class="bi bi-building me-2"></i>Юридическая фирма
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Основное меню -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/clients}">
+                            Клиенты
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/employees}">
+                            Сотрудники </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/services}">
+                            Услуги
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contracts}">
+                            Договоры
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Поиск -->
+                <!--<form th:action="@{/search}" method="get" class="d-flex search-box me-3">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Поиск...">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>-->
+
+                <!-- Профиль -->
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle me-1"></i>
+                            <span sec:authentication="name">Пользователь</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <!--<li><a class="dropdown-item" th:href="@{/profile}">Профиль</a></li>
+                            <li sec:authorize="hasRole('ADMIN')">
+                                <a class="dropdown-item" th:href="@{/admin}">Администрирование</a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>-->
+                            <li>
+                                <form th:action="@{/logout}" method="post" style="margin: 0;">
+                                    <button class="dropdown-item" type="submit">Выход</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" th:href="@{/login}">Войти</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Шапка -->
+
+<div class="container mt-4">
+    <!-- Приветствие -->
+    <div class="card welcome-card mb-4">
+        <div class="card-body">
+            <h1 sec:authentication="name" class="card-title"></h1>
+            <p class="card-text">Добро пожаловать в систему управления юридической фирмой</p>
+            <!--<p class="card-text">
+                Ваша роль: <span sec:authentication="principal.authorities"></span>
+            </p>-->
+        </div>
+    </div>
+
+    <!-- Панель поиска -->
+    <!--<div class="card mb-4">
+        <div class="card-body">
+            <form th:action="@{/search}" method="get" class="row g-3">
+                <div class="col-md-5">
+                    <input type="text" name="query" class="form-control" placeholder="Поиск клиентов, служащих или услуг">
+                </div>
+                <div class="col-md-3">
+                    <select name="type" class="form-select">
+                        <option value="">Все категории</option>
+                        <option value="client">Клиенты</option>
+                        <option value="employee">Служащие</option>
+                        <option value="service">Услуги</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-search"></i> Найти
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>-->
+
+    <!-- Быстрые действия -->
+    <div class="mb-4 d-flex flex-wrap gap-3">
+        <a th:href="@{/clients/new}" class="btn btn-primary">
+            <i class="bi bi-person-plus"></i> Добавить клиента
+        </a>
+        <a th:href="@{/contracts/new}" class="btn btn-success">
+            <i class="bi bi-file-plus"></i> Новый договор
+        </a>
+        <a th:href="@{/services/new}" class="btn btn-info" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">
+            <i class="bi bi-plus-circle"></i> Добавить услугу
+        </a>
+        <a th:href="@{/employees/new}" class="btn btn-warning" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">
+            <i class="bi bi-person-badge"></i> Добавить служащего
+        </a>
+    </div>
+
+    <!-- Основные разделы -->
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card card-hover h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-people-fill display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Клиенты</h5>
+                    <p class="card-text">Управление клиентской базой</p>
+                    <a th:href="@{/clients}" class="btn btn-outline-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card card-hover h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-file-earmark-text-fill display-4 text-success mb-3"></i>
+                    <h5 class="card-title">Договоры</h5>
+                    <p class="card-text">Регистрация и отслеживание договоров</p>
+                    <a th:href="@{/contracts}" class="btn btn-outline-success">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card card-hover h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-briefcase-fill display-4 text-info mb-3"></i>
+                    <h5 class="card-title">Услуги</h5>
+                    <p class="card-text">Каталог юридических услуг</p>
+                    <a th:href="@{/services}" class="btn btn-outline-info">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4" sec:authorize="hasAnyRole('ADMIN', 'MANAGER')">
+            <div class="card card-hover h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-person-badge-fill display-4 text-warning mb-3"></i>
+                    <h5 class="card-title">Служащие</h5>
+                    <p class="card-text">Управление персоналом</p>
+                    <a th:href="@{/employees}" class="btn btn-outline-warning">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок только для ADMIN -->
+    <!--<div class="row mt-3" sec:authorize="hasRole('ADMIN')">
+        <div class="col-12">
+            <div class="card card-hover">
+                <div class="card-body text-center">
+                    <i class="bi bi-graph-up display-4 text-danger mb-3"></i>
+                    <h5 class="card-title">Отчеты</h5>
+                    <p class="card-text">Аналитика, статистика, KPI</p>
+                    <a th:href="@{/reports}" class="btn btn-danger">Перейти</a>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<footer th:fragment="main-footer" class="bg-primary text-white pt-4 pb-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <!-- Колонка 1: Контакты -->
+            <div class="col-md-4 mb-3">
+                <h5><i class="bi bi-telephone"></i> Контакты</h5>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-envelope me-2"></i> info@lawfirm.com</li>
+                    <li><i class="bi bi-phone me-2"></i> +7 (495) 123-45-67</li>
+                    <li><i class="bi bi-geo-alt me-2"></i> Москва, ул. Юридическая, 15</li>
+                </ul>
+            </div>
+
+            <!-- Колонка 2: Меню -->
+            <div class="col-md-4 mb-3">
+                <h5><i class="bi bi-list-ul"></i> Меню</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white text-decoration-none">О компании</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Услуги</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Специалисты</a></li>
+                </ul>
+            </div>
+
+            <!-- Колонка 3: Соцсети -->
+            <div class="col-md-4 mb-3">
+                <h5><i class="bi bi-people"></i> Мы в соцсетях</h5>
+                <div class="social-links">
+                    <a href="#" class="text-white me-2"><i class="bi bi-telegram fs-4"></i></a>
+                    <a href="#" class="text-white me-2"><i class="bi bi-whatsapp fs-4"></i></a>
+                    <a href="#" class="text-white me-2"><i class="bi bi-linkedin fs-4"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Копирайт -->
+        <div class="text-center mt-3 pt-3 border-top">
+            <p class="mb-0">© 2025 Юридическая фирма "Правовед". Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

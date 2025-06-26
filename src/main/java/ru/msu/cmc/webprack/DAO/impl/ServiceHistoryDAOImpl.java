@@ -14,7 +14,7 @@ public class ServiceHistoryDAOImpl extends CommonDAOImpl<ServiceHistory, Long> i
         super(ServiceHistory.class);
     }
 
-    @Override
+    /*@Override
     public List<ServiceHistory> getHistoryByClient(Long clientId) {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
@@ -32,5 +32,5 @@ public class ServiceHistoryDAOImpl extends CommonDAOImpl<ServiceHistory, Long> i
                     .setParameter("employeeId", employeeId)
                     .list();
         }
-    }
+    }*/
 }

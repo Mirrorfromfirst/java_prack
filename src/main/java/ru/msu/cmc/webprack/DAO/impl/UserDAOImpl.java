@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 import ru.msu.cmc.webprack.DAO.UserDAO;
 import ru.msu.cmc.webprack.models.Users;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserDAOImpl extends CommonDAOImpl<Users, Long> implements UserDAO {
@@ -24,7 +26,7 @@ public class UserDAOImpl extends CommonDAOImpl<Users, Long> implements UserDAO {
         }
     }
 
-    @Override
+    /*@Override
     public List<Users> getUsersByRole(String role) {
         try (Session session = sessionFactory.openSession()) {
             return session
@@ -32,9 +34,9 @@ public class UserDAOImpl extends CommonDAOImpl<Users, Long> implements UserDAO {
                     .setParameter("role", role)
                     .list();
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<Users> getUsersByEmployeeId(Long employeeId) {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
@@ -53,4 +55,13 @@ public class UserDAOImpl extends CommonDAOImpl<Users, Long> implements UserDAO {
                     .list();
         }
     }
+
+    @Override
+    public List<Users> getAllUsers() {
+        try (Session session = sessionFactory.openSession()) {
+            long count = (Long) session.createQuery("SELECT COUNT(*) FROM Users").getSingleResult();
+            List<Users> All = session.createQuery("FROM Users", Users.class).list();
+            return All;
+        }
+    }*/
 }
