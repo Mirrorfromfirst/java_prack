@@ -17,12 +17,13 @@ CREATE TABLE Clients (
 -- Таблица "Employees" - информация о служащих
 CREATE TABLE Employees (
                            employee_id INT PRIMARY KEY,  -- Уникальный идентификатор служащего
-                           full_name VARCHAR(255) NOT NULL,             -- ФИО сотрудника
+                           name VARCHAR(255) NOT NULL,             -- ФИО сотрудника
                            position VARCHAR(255) NOT NULL,              -- Должность
                            email VARCHAR(255),                          -- Электронная почта
                            phone VARCHAR(20),                           -- Телефон
                            address VARCHAR(255),                        -- Адрес
-                           education VARCHAR(255)                       -- Образование
+                           FOREIGN KEY (user_id) REFERENCES Users(user_id)  -- Связь с таблицей Clients (если это клиент)
+
 );
 
 -- Таблица "Services" - информация о предоставляемых услугах
@@ -59,13 +60,10 @@ CREATE TABLE Contracts (
 );
 
 -- Таблица "Users" - информация о пользователях системы
-CREATE TABLE Users (
-                       user_id INT PRIMARY KEY,        -- Уникальный идентификатор пользователя
-                       username VARCHAR(255) NOT NULL,                 -- Логин пользователя
-                       password_hash VARCHAR(255) NOT NULL,            -- Хэш пароля
-                       role VARCHAR(255) NOT NULL, -- ENUM('admin', 'manager', 'employee') Роль пользователя
-                       client_id INT,                                 -- Ссылка на клиента (если это клиент)
-                       employee_id INT,                               -- Ссылка на сотрудника (если это сотрудник)
-                       FOREIGN KEY (client_id) REFERENCES Clients(client_id),  -- Связь с таблицей Clients (если это клиент)
-                       FOREIGN KEY (employee_id) REFERENCES Employees(employee_id)  -- Связь с таблицей Employees (если это сотрудник)
-);
+CREATE TABLE Users
+(
+    user_id       SERIAL PRIMARY KEY,    -- Уникальный идентификатор пользователя
+    username      VARCHAR(255) NOT NULL, -- Логин пользователя
+    password_hash VARCHAR(255) NOT NULL, -- Хэш пароля
+    role          VARCHAR(255) NOT NULL, -- ENUM('admin', 'manager', 'employee') Роль пользователя
+)

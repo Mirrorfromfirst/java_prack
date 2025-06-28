@@ -44,7 +44,7 @@ INSERT INTO Contracts (client_id, service_id, start_date, end_date, terms) VALUE
                                                                                (6, 6, '2025-04-01', '2025-10-01', 'Судебное представительство по гражданским делам на 6 месяцев.');
 
 -- Заполнение таблицы "Users"
-INSERT INTO Users (user_id, username, password_hash, role, client_id, employee_id) VALUES
+INSERT INTO Users (username, password_hash, role, client_id, employee_id) VALUES
                                                                               (1, 'client_ivan', 'hashed_password_ivan', 'client', 1, NULL),  -- Клиент
                                                                               (2, 'manager_petrov', 'hashed_password_petrov', 'employee', NULL, 1),  -- Сотрудник
                                                                               (3, 'employee_nikolaev', 'hashed_password_nikolaev', 'employee', NULL, 3),  -- Сотрудник

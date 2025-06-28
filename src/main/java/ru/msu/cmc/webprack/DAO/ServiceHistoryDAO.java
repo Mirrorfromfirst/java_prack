@@ -5,6 +5,6 @@ import ru.msu.cmc.webprack.models.ServiceHistory;
 import java.util.List;
 
 public interface ServiceHistoryDAO extends CommonDAO<ServiceHistory, Long>{
-    List<ServiceHistory> getHistoryByClient(Long clientId);
-    List<ServiceHistory> getHistoryByEmployee(Long employeeId);
+   // List<ServiceHistory> getHistoryByClient(Long clientId);
+    //List<ServiceHistory> getHistoryByEmployee(Long employeeId);
 }

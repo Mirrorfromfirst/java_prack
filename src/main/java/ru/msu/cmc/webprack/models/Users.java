@@ -10,22 +10,30 @@ import lombok.*;
 @Setter
 @ToString
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Table(name = "Users")
 public class Users implements CommonEntity<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = true, name = "user_id")
+    @Column(nullable = false, name = "user_id")
     private Long id;
 
     @Column(nullable = true, name = "username")
+    @NonNull
     private String name;
 
-    @Column(nullable = true, name = "password_hash")
+    @Column(nullable = false, name = "password_hash")
     private String pass;
 
     @Column(nullable = true, name = "role")
     private String role;
+
+    /*@OneToOne(mappedBy = "user")
+    private Employees employee;
+
+    @OneToOne(mappedBy = "user")
+    private Clients client;*/
 
     @Override
     public boolean equals(Object o) {
