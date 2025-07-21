@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface ClientsDAO extends CommonDAO<Clients, Long> {
-    //List<Clients> searchClients(String nameOrContactInfo, String serviceName, Date serviceDate);
     List<Clients> getAllUsers();
 
 }

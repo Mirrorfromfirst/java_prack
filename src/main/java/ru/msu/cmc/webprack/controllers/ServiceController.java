@@ -51,10 +51,8 @@ public class ServiceController {
             @RequestParam(required = false) Integer priceTo,
             Model model) {
 
-        // Получаем все услуги из DAO
         List<Services> allServices = servicesDAO.getAllServices();
 
-        // Применяем фильтры
         List<Services> filteredServices = allServices.stream()
                 .filter(service -> name == null || name.isEmpty() ||
                         (service.getName() != null && service.getName().toLowerCase().contains(name.toLowerCase())))
@@ -64,11 +62,9 @@ public class ServiceController {
                         (service.getPrice() != 0 && service.getPrice() <= priceTo))
                 .collect(Collectors.toList());
 
-        // Пагинация
         int totalElements = filteredServices.size();
         int totalPages = (int) Math.ceil((double) totalElements / size);
 
-        // Проверка на выход за пределы страниц
         if (page >= totalPages && totalPages > 0) {
             page = totalPages - 1;
         }
@@ -77,7 +73,6 @@ public class ServiceController {
         int end = Math.min(start + size, totalElements);
         List<Services> pageContent = filteredServices.subList(start, end);
 
-        // Создаём Map с данными для пагинации и фильтров
         Map<String, Object> paginationData = new HashMap<>();
         paginationData.put("content", pageContent);
         paginationData.put("number", page);

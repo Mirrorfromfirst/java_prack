@@ -2,9 +2,7 @@ package ru.msu.cmc.webprack;
 
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import ru.msu.cmc.webprack.DAO.UserDAO;
 import ru.msu.cmc.webprack.models.Users;
 
@@ -19,8 +17,6 @@ public class DAOTest {
     @Autowired
     private UserDAO userDAO;
 
-    //private Users testUser;
-
     @BeforeEach
     void setup() {
         Users testUser = new Users();
@@ -29,7 +25,6 @@ public class DAOTest {
         testUser.setRole("admin");
         userDAO.save(testUser);
     }
-
     @AfterEach
     void cleanup() {
         Users testUser = userDAO.getUserByUsername("testuser");

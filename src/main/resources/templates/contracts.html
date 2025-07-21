@@ -449,7 +449,6 @@
                                     <i class="bi bi-eye"></i>
                                 </a>
 
-                                <!-- Кнопка для назначения исполнителя -->
                                 <a th:if="${contract.status?.name() == 'NEW'}"
                                    th:href="@{/contracts/{id}/assign(id=${contract.contract_id})}"
                                    class="btn btn-outline-success"
@@ -457,7 +456,6 @@
                                     <i class="bi bi-person-plus"></i>
                                 </a>
 
-                                <!-- Кнопка для завершения договора -->
                                 <a th:if="${contract.status?.name() == 'IN_PROGRESS'}"
                                    th:href="@{/contracts/{id}/complete(id=${contract.contract_id})}"
                                    class="btn btn-outline-success"
@@ -485,7 +483,6 @@
 <footer th:fragment="main-footer" class="bg-primary text-white pt-4 pb-4 mt-5">
     <div class="container">
         <div class="row">
-            <!-- Колонка 1: Контакты -->
             <div class="col-md-4 mb-3">
                 <h5><i class="bi bi-telephone"></i> Контакты</h5>
                 <ul class="list-unstyled">
@@ -495,7 +492,6 @@
                 </ul>
             </div>
 
-            <!-- Колонка 2: Меню -->
             <div class="col-md-4 mb-3">
                 <h5><i class="bi bi-list-ul"></i> Меню</h5>
                 <ul class="list-unstyled">
@@ -505,7 +501,6 @@
                 </ul>
             </div>
 
-            <!-- Колонка 3: Соцсети -->
             <div class="col-md-4 mb-3">
                 <h5><i class="bi bi-people"></i> Мы в соцсетях</h5>
                 <div class="social-links">
@@ -516,7 +511,6 @@
             </div>
         </div>
 
-        <!-- Копирайт -->
         <div class="text-center mt-3 pt-3 border-top">
             <p class="mb-0">© 2025 Юридическая фирма "Правовед". Все права защищены.</p>
         </div>

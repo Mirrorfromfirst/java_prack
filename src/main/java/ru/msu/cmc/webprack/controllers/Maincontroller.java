@@ -16,9 +16,8 @@ public class Maincontroller {
         System.out.println(request.getRequestURI());
         model.addAttribute("requestURI", request.getRequestURI());
 
-        // Добавьте тестовые данные для проверки
         model.addAttribute("message", "Тест dashboard");
-        return "dashboard"; // должно соответствовать имени файла
+        return "dashboard";
     }
 }
 

@@ -30,8 +30,8 @@ public class Services implements CommonEntity<Long>{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true; //aka link of two objects are the same
-        if (o == null || getClass() != o.getClass()) return false; //aka links are not the same
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Services other = (Services) o;
         return Objects.equals(id, other.id)

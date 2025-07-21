@@ -12,8 +12,8 @@ import ru.msu.cmc.webprack.models.Employees;
 @Transactional
 public class ContractServiceImpl implements ContractService {
 
-    private final ContractsDAO contractDAO; // Ваш существующий DAO
-    private final EmployeeDAO employeeDAO; // Ваш существующий DAO
+    private final ContractsDAO contractDAO;
+    private final EmployeeDAO employeeDAO;
 
     @Autowired
     public ContractServiceImpl(ContractsDAO contractDAO, EmployeeDAO employeeDAO) {
@@ -33,7 +33,7 @@ public class ContractServiceImpl implements ContractService {
 
         contract.setAssignedEmployee(employee);
         contract.setStatus(Contracts.ContractStatus.IN_PROGRESS);
-        contractDAO.update(contract); // Ваш метод DAO
+        contractDAO.update(contract);
     }
 
     @Override

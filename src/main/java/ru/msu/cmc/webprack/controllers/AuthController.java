@@ -97,7 +97,6 @@ public class AuthController {
             RedirectAttributes redirectAttrs,
             Model model) {
 
-        // Валидация
         if (userDAO.getUserByUsername(username) != null) {
             model.addAttribute("usernameError", "Этот логин уже занят");
             model.addAttribute("username", username);
@@ -112,7 +111,6 @@ public class AuthController {
             return "register";
         }
 
-        // Создание пользователя
         Users newUser = new Users();
         newUser.setName(username);
         newUser.setPass(passwordEncoder.encode(password));

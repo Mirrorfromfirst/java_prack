@@ -42,7 +42,6 @@ public class ContractController {
 
     private final ContractService contractService;
 
-    // Рекомендуемый способ - внедрение через конструктор
     @Autowired
     public ContractController(ContractService contractService) {
         this.contractService = contractService;

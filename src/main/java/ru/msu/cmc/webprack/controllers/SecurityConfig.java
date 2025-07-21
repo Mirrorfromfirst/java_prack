@@ -70,9 +70,9 @@ public class SecurityConfig {
 
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/perform_login") // Должно совпадать с action формы
+                        .loginProcessingUrl("/perform_login")
                         .defaultSuccessUrl("/", true)
-                        .failureUrl("/login?error=true") // Именно этот параметр проверяет AuthController
+                        .failureUrl("/login?error=true")
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -93,18 +93,16 @@ public class SecurityConfig {
                 throw new UsernameNotFoundException("User not found with username: " + username);
             }
 
-            // Используем org.springframework.security.core.userdetails.User
             return org.springframework.security.core.userdetails.User.builder()
-                    .username(user.getName())       // поле с логином
-                    .password(user.getPass())       // поле с паролем
-                    .roles(user.getRole())          // поле с ролью (например "ADMIN")
+                    .username(user.getName())
+                    .password(user.getPass())
+                    .roles(user.getRole())
                     .build();
         };
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Для простого сравнения паролей "как есть"
         return new PasswordEncoder() {
             @Override
             public String encode(CharSequence rawPassword) {
